@@ -16,6 +16,10 @@ export interface KeycloakConfig {
    */
   clientId: string;
   /**
+   * Client identifier, example: 'myapp'
+   */
+  clientSecret: string;
+  /**
    * OIDC-specific configuration parameters
    */
   oidcProvider?: string | OIDCProviderConfig;
