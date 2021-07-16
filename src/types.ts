@@ -374,6 +374,8 @@ export interface KeycloakJSON {
   resource?: string;
 
   clientSecret?: string;
+
+  scope?: string;
 }
 
 export interface OAuthResponse {

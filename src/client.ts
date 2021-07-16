@@ -80,6 +80,8 @@ export class KeycloakClient implements KeycloakInstance {
 
   clientSecret?: string;
 
+  scope?: string;
+
   redirectUri?: string;
 
   profile?: KeycloakProfile;
@@ -296,6 +298,15 @@ export class KeycloakClient implements KeycloakInstance {
       scope = 'openid';
     }
 
+    if (this.scope) {
+      if (this.scope.indexOf('openid') !== -1) {
+        scope = this.scope;
+      } else {
+        scope = 'openid ' + this.scope;
+      }
+    } else {
+      scope = 'openid';
+    }
     const baseUrl =
       action === 'register'
         ? this.endpoints!.register()
@@ -929,6 +940,7 @@ export class KeycloakClient implements KeycloakInstance {
 
       this.realm = configJSON.realm;
       this.clientId = configJSON.resource;
+      this.scope = configJSON.scope;
       this.clientSecret = configJSON.clientSecret;
 
       this.endpoints = setupOidcEndoints({
@@ -949,7 +961,7 @@ export class KeycloakClient implements KeycloakInstance {
 
     this.clientId = config.clientId;
     this.clientSecret = config.clientSecret;
-
+    this.scope = config.scope
     const oidcProvider = config.oidcProvider;
     // When oidcProvider config is not supplied, use local configuration params
     if (!oidcProvider) {
