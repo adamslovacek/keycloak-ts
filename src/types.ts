@@ -16,9 +16,13 @@ export interface KeycloakConfig {
    */
   clientId: string;
   /**
-   * Client identifier, example: 'myapp'
+   * Client secret, example: 'myapp'
    */
   clientSecret: string;
+  /**
+   * Client required scope
+   */
+  scope: string;
   /**
    * OIDC-specific configuration parameters
    */
@@ -374,6 +378,8 @@ export interface KeycloakJSON {
   resource?: string;
 
   clientSecret?: string;
+
+  scope?: string;
 }
 
 export interface OAuthResponse {
